@@ -72,18 +72,12 @@ function searchByName(people){
       return false;
     }
   })
-<<<<<<< HEAD
 
   if(foundPerson.length == 0)
     foundPerson = null;
   else
     foundPerson = foundPerson[0];
 
-=======
-  if (foundPerson.length == 1) {
-    foundPerson = foundPerson[0];
-  }
->>>>>>> 4fc5eedaaf6f627df72c0728ba0a3675acfb4e71
   return foundPerson;
 }
 
@@ -217,7 +211,6 @@ function chars(input){
   return true; // default validation only
 }
 
-<<<<<<< HEAD
 // helper function to pass into promptFor to validate male/female answers
 function maleFemale(input){
   return input.toLowerCase() == "male" || input.toLowerCase() == "female";
@@ -243,7 +236,6 @@ function eyeColors(input){
          input.toLowerCase() == "gray";
 }
 
-=======
 // function to get descendants of a provided person
 function getDescendants(person, people, descendants = null) {
   startingDescendants = descendants;
@@ -256,4 +248,4 @@ function getDescendants(person, people, descendants = null) {
   
   return descendants;
 }
->>>>>>> 4fc5eedaaf6f627df72c0728ba0a3675acfb4e71
+

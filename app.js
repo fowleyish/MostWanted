@@ -41,12 +41,12 @@ function mainMenu(person, people){
     // TODO: get person's info
     break;
     case "family":
-    // TODO: get person's family
+    getFamily(person, people);
+    mainMenu(person, people);
     break;
     case "descendants":
-    // TODO: get person's descendants
     let descendantsArray = getDescendants(person, people);
-    alert(descendantsArray.map(x => x.firstName + ' ' + x.lastName));
+    alert(descendantsArray.map(x => ' ' + x.firstName + ' ' + x.lastName));
     mainMenu(person, people);
     break;
     case "restart":
@@ -242,9 +242,58 @@ function eyeColors(input){
          input.toLowerCase() == "gray";
 }
 
-// function to get descendants of a provided person
-function getDescendants(person, people) {
-  let descendants = people.filter(x => x.parents.includes(person.id))
+// function to get descendants of a provided person; thanks Nevin!
+function getDescendants(person, people, descendants = []){
+  people.map(function(el){
+    if(el.parents.includes(person.id)){
+      descendants.push(el);
+      getDescendants(el, people, descendants);
+    }
+  });
   return descendants;
 }
 
+// function to get family members
+function getFamily(person, people) {
+  let parents = getParents(person, people);
+  let spouse = getSpouse(person, people);
+  let siblings = getSiblings(person, people);
+  let output = [];
+  for (let i = 0; i < parents.length; i++) {
+    output.push(`Parent: ${parents[i].firstName} ${parents[i].lastName}`);
+  }
+  spouse != null ? output.push(`Spouse: ${spouse.firstName} ${spouse.lastName}`) : output.push(`Not married`);
+  for (let i = 0; i < siblings.length; i++) {
+    output.push(`Sibling: ${siblings[i].firstName} ${siblings[i].lastName}`);
+  }
+  alert(output.join('\n'));
+}
+
+// function to get parents of supplied person
+function getParents(person, people) {
+  let parentIds = person.parents;
+  let parents = [];
+  for (let i = 0; i < parentIds.length; i++) {
+    let parent = people.filter(x => x.id == parentIds[i]);
+    if (parent[0] != null) {
+      parents.push(parent[0]);
+    }
+  }
+  return parents;
+}
+
+// function to get spouse of supplied person
+function getSpouse(person, people) {
+  let spouseId = person.currentSpouse;
+  let spouse;
+  if (spouseId != null) {
+    spouse = people.filter(x => x.id == spouseId);
+  }
+  return spouse[0];
+}
+
+// function to get siblings of supplied person 
+function getSiblings(person, people) {
+  let siblings = people.filter(x => x.parents.includes(person.parents[0] || person.parents[1]) && x != person);
+  return siblings;
+}

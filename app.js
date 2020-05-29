@@ -111,7 +111,14 @@ function chars(input){
 }
 
 // function to get descendants of a provided person
-function getDescendants(person, people) {
-  let descendants = people.filter(x => x.parents.includes(person.id))
+function getDescendants(person, people, descendants = null) {
+  startingDescendants = descendants;
+  if ( descendants === null ) {
+    let descendants = people.filter(x => x.parents.includes(person.id))
+    getDescendants(person, people, descendants);
+  } else {
+    
+  }
+  
   return descendants;
 }

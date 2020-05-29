@@ -46,7 +46,7 @@ function mainMenu(person, people){
     case "descendants":
     // TODO: get person's descendants
     let descendantsArray = getDescendants(person, people);
-    alert(descendantsArray.map(x => x.firstName + ' ' + x.lastName));
+    alert(descendantsArray.map(x => ' ' + x.firstName + ' ' + x.lastName));
     mainMenu(person, people);
     break;
     case "restart":
@@ -237,15 +237,12 @@ function eyeColors(input){
 }
 
 // function to get descendants of a provided person
-function getDescendants(person, people, descendants = null) {
-  startingDescendants = descendants;
-  if ( descendants === null ) {
-    let descendants = people.filter(x => x.parents.includes(person.id))
-    getDescendants(person, people, descendants);
-  } else {
-    
-  }
-  
+function getDescendants(person, people, descendants = []){
+  people.map(function(el){
+    if(el.parents.includes(person.id)){
+      descendants.push(el);
+      getDescendants(el, people, descendants);
+    }
+  });
   return descendants;
 }
-

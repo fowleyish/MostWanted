@@ -12,6 +12,7 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
+      searchResults = searchByGender(people);
       // TODO: search by traits
       break;
       default:
@@ -55,6 +56,7 @@ function mainMenu(person, people){
   }
 }
 
+// returns person object searched by firstName and lastName; null, if not found.
 function searchByName(people){
   let firstName = promptFor("What is the person's first name?", chars);
   let lastName = promptFor("What is the person's last name?", chars);
@@ -67,8 +69,109 @@ function searchByName(people){
       return false;
     }
   })
-  // TODO: find the person using the name they entered
+
+  if(foundPerson.length == 0)
+    foundPerson = null;
+  else
+    foundPerson = foundPerson[0];
+
   return foundPerson;
+}
+
+// returns list of people searched by gender; otherwise, array size 0.
+function searchByGender(people){
+  let gender = promptFor("What is the person's gender?", maleFemale);
+
+  let foundPeople = people.filter(function(person){
+    if(person.gender === gender){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+
+  return foundPeople;
+}
+
+// returns list of people searched by date of birth (dob); otherwise, array size 0.
+function searchByDOB(people){
+  let dob = promptFor("What is the person's date of birth?", dateOfBirth);
+
+  let foundPeople = people.filter(function(person){
+    if(person.dob === dob){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+
+  return foundPeople;
+}
+
+// returns list of people searched by height; otherwise, array size 0.
+function searchByHeight(people){
+  let height = promptFor("What is the person's height (inches)?", numbers);
+
+  let foundPeople = people.filter(function(person){
+    if(person.height === height){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+
+  return foundPeople;
+}
+
+// returns list of people searched by weight; otherwise, array size 0.
+function searchByWeight(people){
+  let weight = promptFor("What is the person's weight (lbs)?", numbers);
+
+  let foundPeople = people.filter(function(person){
+    if(person.weight === weight){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+
+  return foundPeople;
+}
+
+// returns list of people searched by eye color; otherwise, array size 0.
+function searchByEyeColor(people){
+  let eyeColor = promptFor("What is the person's eye color?", eyeColors);
+
+  let foundPeople = people.filter(function(person){
+    if(person.eyeColor === eyeColor){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+
+  return foundPeople;
+}
+
+// returns list of people searched by occupation; otherwise, array size 0.
+function searchByOccupation(people){
+  let occupation = promptFor("What is the person's occupation?", chars);
+
+  let foundPeople = people.filter(function(person){
+    if(person.occupation === occupation){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+
+  return foundPeople;
 }
 
 // alerts a list of people
@@ -104,3 +207,29 @@ function yesNo(input){
 function chars(input){
   return true; // default validation only
 }
+
+// helper function to pass into promptFor to validate male/female answers
+function maleFemale(input){
+  return input.toLowerCase() == "male" || input.toLowerCase() == "female";
+}
+
+// helper function to pass into promptFor to validate date of birth (dob)
+function dateOfBirth(input){
+  // TODO
+  return true;
+}
+
+// helper function to pass into promptFor to validate number entries
+function numbers(input){
+  return parseInt(input) != NaN;
+}
+
+// helper function to pass into promptFor to validate eye color
+function eyeColors(input){
+  return input.toLowerCase() == "brown" || input.toLowerCase() == "black" || 
+         input.toLowerCase() == "blue" || input.toLowerCase() == "hazel" ||  
+         input.toLowerCase() == "green"  || input.toLowerCase() == "amber" || 
+         input.toLowerCase() == "violet" || input.toLowerCase() == "red" || 
+         input.toLowerCase() == "gray";
+}
+

@@ -44,6 +44,9 @@ function mainMenu(person, people){
     break;
     case "descendants":
     // TODO: get person's descendants
+    let descendantsArray = getDescendants(person, people);
+    alert(descendantsArray.map(x => x.firstName + ' ' + x.lastName));
+    mainMenu(person, people);
     break;
     case "restart":
     app(people); // restart
@@ -67,7 +70,9 @@ function searchByName(people){
       return false;
     }
   })
-  // TODO: find the person using the name they entered
+  if (foundPerson.length == 1) {
+    foundPerson = foundPerson[0];
+  }
   return foundPerson;
 }
 
@@ -103,4 +108,10 @@ function yesNo(input){
 // helper function to pass in as default promptFor validation
 function chars(input){
   return true; // default validation only
+}
+
+// function to get descendants of a provided person
+function getDescendants(person, people) {
+  let descendants = people.filter(x => x.parents.includes(person.id))
+  return descendants;
 }

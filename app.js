@@ -13,6 +13,8 @@ function app(people){
       break;
     case 'no':
       searchResults = searchByTraits(people);
+      if (searchResults == null)   // quit
+        return;
       break;
     default:
       app(people); // restart app
@@ -20,8 +22,7 @@ function app(people){
   }
   
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
-  if (searchResults != null)  // quit entered in searchByTraits()
-    mainMenu(searchResults, people);
+  mainMenu(searchResults, people);
 }
 
 // Menu function to call once you find who you are looking for
@@ -42,12 +43,13 @@ function mainMenu(person, people){
     break;
     case "family":
     getFamily(person, people);
-    mainMenu(person, people);
     break;
     case "descendants":
     let descendantsArray = getDescendants(person, people);
-    alert(descendantsArray.map(x => ' ' + x.firstName + ' ' + x.lastName));
-    mainMenu(person, people);
+    if (descendantsArray.length > 0)
+      alert(descendantsArray.map(x => ' ' + x.firstName + ' ' + x.lastName));
+    else
+      alert("No descendants in database");
     break;
     case "restart":
     app(people); // restart
@@ -55,8 +57,8 @@ function mainMenu(person, people){
     case "quit":
     return; // stop execution
     default:
-    return mainMenu(person, people); // ask again
   }
+  mainMenu(person, people); // ask again
 }
 
 // search by multiple traits

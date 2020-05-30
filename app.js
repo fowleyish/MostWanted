@@ -116,7 +116,6 @@ function searchByTraits(people){
       }
       else if (searchResults.length > 1){
         displayPeople(searchResults);
-        //alert(searchResults.map(x =>  x.firstName + ' ' + x.lastName));
       }
     }
   }
@@ -203,10 +202,27 @@ function displayPerson(person){
     alert("Name: " + person.firstName + " " + person.lastName +
         "\nGender: " + person.gender +
         "\nDate of Birth: " + person.dob +
+        "\nAge: " + getAge(person) + 
         "\nHeight: " + person.height.toString() + " (in)" +
         "\nWeight: " + person.weight.toString() + " (lb)" +
         "\nEye Color: " + person.eyeColor + 
         "\nOccupation: " + person.occupation);
+}
+
+// get age of person based on today's date.
+function getAge(person){
+  let age = 0;
+  let today = new Date();
+  let month = today.getMonth() + 1;
+  let dob = person.dob.split('/');
+
+  age = today.getFullYear() -  parseInt(dob[2]);
+  // Hasn't had their birthday yet this year.
+  if ((parseInt(dob[0]) > month) ||
+      (parseInt(dob[0]) == month && parseInt(dob[1]) > today.getDate()))
+      age--;
+
+  return age;
 }
 
 // function that prompts and validates user input

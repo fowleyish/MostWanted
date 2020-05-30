@@ -77,6 +77,7 @@ function searchByTraits(people){
         searchResults = searchByGender(searchResults);
         break;
       case "date of birth":
+      case "dob":
         searchResults = searchByDOB(searchResults);
         break;
       case "height":
@@ -224,8 +225,9 @@ function maleFemale(input){
 
 // helper function to pass into promptFor to validate date of birth (dob)
 function dateOfBirth(input){
-  // TODO
-  return true;
+  let dateformat = /^(0?[1-9]|1[0-2])[\/](0?[1-9]|[1-2][0-9]|3[01])[\/]\d{4}$/;  
+  
+  return input.match(dateformat);
 }
 
 // helper function to pass into promptFor to validate number entries

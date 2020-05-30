@@ -20,7 +20,7 @@ function app(people){
   }
   
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
-  if (searchResults != null)
+  if (searchResults != null)  // quit entered in searchByTraits()
     mainMenu(searchResults, people);
 }
 
@@ -38,7 +38,7 @@ function mainMenu(person, people){
 
   switch(displayOption){
     case "info":
-    // TODO: get person's info
+    displayPerson(person);
     break;
     case "family":
     getFamily(person, people);
@@ -74,6 +74,7 @@ function searchByTraits(people){
     criteriaCount++;
     switch(displayOption){
       case "gender":
+      case "g":
         searchResults = searchByGender(searchResults);
         break;
       case "date of birth":
@@ -81,22 +82,28 @@ function searchByTraits(people){
         searchResults = searchByDOB(searchResults);
         break;
       case "height":
+      case "h":
         searchResults = searchByHeight(searchResults);
         break;
       case "weight":
+      case "w":
         searchResults = searchByWeight(searchResults);
         break;
       case "eye color":
+      case "ec":
         searchResults = searchByEyeColor(searchResults);
         break;
       case "occupation":
+      case "o":
         searchResults = searchByOccupation(searchResults);
         break;
       case "restart":
+      case "rs":
         criteriaCount = 0;
         searchResults = people;
         break
       case "quit":
+      case "q":
         return null;
       default:
         app(people);
@@ -108,7 +115,8 @@ function searchByTraits(people){
         searchResults = people;
       }
       else if (searchResults.length > 1){
-        alert(searchResults.map(x =>  x.firstName + ' ' + x.lastName));
+        displayPeople(searchResults);
+        //alert(searchResults.map(x =>  x.firstName + ' ' + x.lastName));
       }
     }
   }
@@ -186,24 +194,27 @@ function searchByOccupation(people){
 
 // alerts a list of people
 function displayPeople(people){
-  alert(people.map(function(person){
-    return person.firstName + " " + person.lastName;
-  }).join("\n"));
+  alert(people.map(x => x.firstName + " " + x.lastName).join("\n"));
 }
 
+// print all of the information about a person:
+// height, weight, age, name, occupation, eye color.
 function displayPerson(person){
-  // print all of the information about a person:
-  // height, weight, age, name, occupation, eye color.
-  let personInfo = "First Name: " + person.firstName + "\n";
-  personInfo += "Last Name: " + person.lastName + "\n";
-  // TODO: finish getting the rest of the information to display
-  alert(personInfo);
+    alert("Name: " + person.firstName + " " + person.lastName +
+        "\nGender: " + person.gender +
+        "\nDate of Birth: " + person.dob +
+        "\nHeight: " + person.height.toString() + " (in)" +
+        "\nWeight: " + person.weight.toString() + " (lb)" +
+        "\nEye Color: " + person.eyeColor + 
+        "\nOccupation: " + person.occupation);
 }
 
 // function that prompts and validates user input
 function promptFor(question, valid){
   do{
     var response = prompt(question).trim();
+    if (!valid(response))
+      alert("Invalid input. Try again.")
   } while(!response || !valid(response));
   return response;
 }

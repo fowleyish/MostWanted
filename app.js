@@ -290,12 +290,20 @@ function getFamily(person, people) {
   let spouse = getSpouse(person, people);
   let siblings = getSiblings(person, people);
   let output = [];
-  for (let i = 0; i < parents.length; i++) {
-    output.push(`Parent: ${parents[i].firstName} ${parents[i].lastName}`);
+  if ( parents.length > 0 ) {
+    for (let i = 0; i < parents.length; i++) {
+      output.push(`Parent: ${parents[i].firstName} ${parents[i].lastName}`);
+    }
+  } else {
+    output.push(`Parent information is not available`);
   }
   spouse != null ? output.push(`Spouse: ${spouse.firstName} ${spouse.lastName}`) : output.push(`Not married`);
-  for (let i = 0; i < siblings.length; i++) {
-    output.push(`Sibling: ${siblings[i].firstName} ${siblings[i].lastName}`);
+  if (siblings.length > 0) {
+    for (let i = 0; i < siblings.length; i++) {
+      output.push(`Sibling: ${siblings[i].firstName} ${siblings[i].lastName}`);
+    }
+  } else {
+    output.push(`No siblings`);
   }
   alert(output.join('\n'));
 }
@@ -319,8 +327,10 @@ function getSpouse(person, people) {
   let spouse;
   if (spouseId != null) {
     spouse = people.filter(x => x.id == spouseId);
+    return spouse[0];
+  } else {
+    return null;
   }
-  return spouse[0];
 }
 
 // function to get siblings of supplied person 

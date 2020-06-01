@@ -152,7 +152,9 @@ function searchByGender(people){
 function searchByDOB(people){
   let dob = promptFor("What is the person's date of birth?", dateOfBirth);
 
-  let foundPeople = people.filter(x => x.dob == dob);
+  // ignore leading 0's on the month and day values for the input and the database.
+  let foundPeople = people.filter(p => p.dob.split('/').reduce((t,e) => (t = parseInt(t).toString() + parseInt(e).toString())) 
+                                       == dob.split('/').reduce((t,e) => (t = parseInt(t).toString() + parseInt(e).toString())));
 
   return foundPeople;
 }

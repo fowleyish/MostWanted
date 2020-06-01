@@ -110,7 +110,7 @@ function searchByTraits(people){
       default:
         app(people);
     }      
-    if (displayOption != "restart"){
+    if (displayOption != "restart" && displayOption != "rs"){
       if (searchResults.length == 0){
         alert("No records match your search criteria.  Try again.");
         criteriaCount = 0;

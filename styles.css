@@ -5,7 +5,7 @@ body {
 }
 
 div#container-searchform {
-    width: 60%;
+    width: 40%;
     -webkit-box-shadow: 0px 0px 16px -5px rgba(0,0,0,0.95); 
     box-shadow: 0px 0px 16px -5px rgba(0,0,0,0.95);
     padding: 20px;
@@ -19,4 +19,49 @@ form section {
     display:flex;
     flex-flow: column nowrap;
     margin: 1vw 0;
+}
+
+p.formFieldLabel {
+    line-height: 0;
+}
+
+.formFieldLabel {
+    font-weight: 550;
+    font-size: larger;
+}
+
+section#eyeOptions {
+    display: flex;
+    flex-direction: row;
+    margin-top: 0;
+}
+
+#blackEye, #blueEye, #hazelEye, #greenEye {
+    margin-left: 1vw;
+}
+
+input[type="submit"] {
+    width: auto;
+    align-self: start;
+    height: 30px;
+    background-color: #ffc300;
+    border: 1px solid orange;
+    font-size: larger;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+
+input[type="submit"]:hover {
+    background-color: darkorange;
+    transition-duration: 0.4s;
+}
+
+section#genderOptions {
+    display: flex;
+    flex-direction: row;
+    margin-top: 0;
+}
+
+input#male {
+    margin-right: 1vw;
 }

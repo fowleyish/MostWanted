@@ -9,6 +9,7 @@
     
     <div id="container-searchform">
       <h1>Most Wanted Search</h1>
+      <hr />
       <form>
         <section id="firstNameSection">
           <label for="firstNameInput" class="formFieldLabel">First name</label>
@@ -24,10 +25,12 @@
         </section>
         <section id="genderSection">
           <p class="formFieldLabel">Gender</p>
-          <label for="male">Male</label>
-          <input type="radio" name="gender" id="male" value="male" />
-          <label for="female">Female</label>
-          <input type="radio" name="gender" id="female" value="female" />
+          <section id="genderOptions">
+            <label for="male">Male</label>
+            <input type="radio" name="gender" id="male" value="male" />
+            <label for="female">Female</label>
+            <input type="radio" name="gender" id="female" value="female" />
+          </section>
         </section>
         <section id="heightSection">
           <label for="height" class="formFieldLabel">Height (in inches)</label>
@@ -39,16 +42,18 @@
         </section>
         <section id="eyeSection">
           <p class="formFieldLabel">Eye color</p>
-          <input type="checkbox" id="brownEye" name="brown" />
-          <label for="brownEye">Brown</label>
-          <input type="checkbox" id="blackEye" name="black" />
-          <label for="blackEye">Black</label>
-          <input type="checkbox" id="blueEye" name="blue" />
-          <label for="blueEye">Blue</label>
-          <input type="checkbox" id="hazelEye" name="hazel" />
-          <label for="hazelEye">Hazel</label>
-          <input type="checkbox" id="greenEye" name="green" />
-          <label for="greenEye">Green</label>
+          <section id="eyeOptions">
+            <input type="checkbox" id="brownEye" name="brown" />
+            <label for="brownEye">Brown</label>
+            <input type="checkbox" id="blackEye" name="black" />
+            <label for="blackEye">Black</label>
+            <input type="checkbox" id="blueEye" name="blue" />
+            <label for="blueEye">Blue</label>
+            <input type="checkbox" id="hazelEye" name="hazel" />
+            <label for="hazelEye">Hazel</label>
+            <input type="checkbox" id="greenEye" name="green" />
+            <label for="greenEye">Green</label>
+          </section>
         </section>
         <section id="occupationSection">
           <label for="occupation" class="formFieldLabel">Occupation</label>

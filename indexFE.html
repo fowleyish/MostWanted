@@ -3,9 +3,68 @@
   <head>
     <meta charset="utf-8">
     <title>devCodeCamp &middot; Most Wanted</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
   </head>
   <body>
-    <button onclick="app(data)">Start Searching</button>
+    
+    <div id="container-searchform">
+      <h1>Most Wanted Search</h1>
+      <form>
+        <section id="firstNameSection">
+          <label for="firstNameInput" class="formFieldLabel">First name</label>
+          <input type="text" name="firstName" id="firstNameInput" placeholder="ex: John" />
+        </section>
+        <section id="lastNameSection">
+          <label for="lastNameInput" class="formFieldLabel">Last name</label>
+          <input type="text" name="lastName" id="lastNameInput" placeholder="ex: Doe" />
+        </section>
+        <section id=dobSection">
+          <label for="dateOfBirthInput" class="formFieldLabel">Date of birth</label>
+          <input type="date" name="dateOfBirth" id="dateOfBirthInput" placeholder="MM/DD/YYYY" />
+        </section>
+        <section id="genderSection">
+          <p class="formFieldLabel">Gender</p>
+          <label for="male">Male</label>
+          <input type="radio" name="gender" id="male" value="male" />
+          <label for="female">Female</label>
+          <input type="radio" name="gender" id="female" value="female" />
+        </section>
+        <section id="heightSection">
+          <label for="height" class="formFieldLabel">Height (in inches)</label>
+          <input type="number" id="height" name="height" placeholder="ex: 72" />
+        </section>
+        <section id="weightSection">
+          <label for="weight" class="formFieldLabel">Weight (in pounds/lbs)</label>
+          <input type="number" id="weight" name="weight" placeholder="ex: 189" /> 
+        </section>
+        <section id="eyeSection">
+          <p class="formFieldLabel">Eye color</p>
+          <input type="checkbox" id="brownEye" name="brown" />
+          <label for="brownEye">Brown</label>
+          <input type="checkbox" id="blackEye" name="black" />
+          <label for="blackEye">Black</label>
+          <input type="checkbox" id="blueEye" name="blue" />
+          <label for="blueEye">Blue</label>
+          <input type="checkbox" id="hazelEye" name="hazel" />
+          <label for="hazelEye">Hazel</label>
+          <input type="checkbox" id="greenEye" name="green" />
+          <label for="greenEye">Green</label>
+        </section>
+        <section id="occupationSection">
+          <label for="occupation" class="formFieldLabel">Occupation</label>
+          <input type="text" name="occupation" id="occupation" placeholder="ex: Nurse" />
+        </section>
+        <section id="submitSection">
+          <input type="submit" value="Search" />
+        </section>
+      </form>
+    </div>
+
+
+
+
+
+
     <script src="data.js"></script>
     <script src="app.js"></script>
   </body>

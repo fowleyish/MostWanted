@@ -5,7 +5,9 @@ Build all of your functions for displaying and gathering information below (GUI)
 
 // app is the function called to start the entire application
 function app(people){
-  let searchType = promptFor("Do you know the name of the person you are looking for?\nEnter 'yes' or 'no'", yesNo).toLowerCase();
+  let searchType = promptFor("Do you know the name of the person you are looking for?\nEnter 'yes' or 'no'", yesNo);
+  if (searchType != null)
+    searchType = searchType.toLowerCase();
   let searchResults;
   switch(searchType){
     case 'yes':
@@ -18,7 +20,7 @@ function app(people){
       break;
     default:
       app(people); // restart app
-      break;
+      return;   // don't let this fall into mainMenu when app() returns.
   }
   
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
@@ -32,10 +34,13 @@ function mainMenu(person, people){
 
   if(!person){
     alert("Could not find that individual.");
-    return app(people); // restart
+    app(people); // restart
+    return;
   }
 
   let displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
+  if (displayOption != null)
+    displayOption = displayOption.toLowerCase();
 
   switch(displayOption){
     case "info":
@@ -53,7 +58,7 @@ function mainMenu(person, people){
     break;
     case "restart":
     app(people); // restart
-    break;
+    return;   // don't let this fall into mainMenu when app() returns.
     case "quit":
     return; // stop execution
     default:
@@ -72,6 +77,8 @@ function searchByTraits(people){
       displayOption = prompt("New search\n\nEnter the search criteria: \ngender, date of birth, height, weight, eye color, occupation\n\nEnter 'quit' to exit.");
     else
       displayOption = prompt("Countinue narrowing down search...\n\nEnter the search criteria: \ngender, date of birth, height, weight, eye color, occupation\n\nEnter 'restart' to begin new search. Enter 'quit' to exit.");
+    if (displayOption != null)
+      displayOption = displayOption.toLowerCase();
 
     criteriaCount++;
     switch(displayOption){
@@ -108,11 +115,14 @@ function searchByTraits(people){
       case "quit":
       case "q":
         return null;
+      case null:
+        app(people);
+        return null;   // don't want to fall into below logic when app() returns.
       default:
         displayOption = "cont";
         alert("Invalid input. Try again.")
     }      
-    if (displayOption != "restart" && displayOption != "rs" && displayOption != "cont"){
+    if (displayOption != "restart" && displayOption != "rs" && displayOption != "cont" && searchResults != null){
       if (searchResults.length == 0){
         alert("No records match your search criteria.  Try again.");
         criteriaCount = 0;
@@ -153,10 +163,13 @@ function searchByGender(people){
 // returns list of people searched by date of birth (dob); otherwise, array size 0.
 function searchByDOB(people){
   let dob = promptFor("What is the person's date of birth?", dateOfBirth);
+  let foundPeople = [];
 
+  if (dob != null) {
   // ignore leading 0's on the month and day values for the input and the database.
-  let foundPeople = people.filter(p => p.dob.split('/').reduce((t,e) => (t = parseInt(t).toString() + parseInt(e).toString())) 
+    foundPeople = people.filter(p => p.dob.split('/').reduce((t,e) => (t = parseInt(t).toString() + parseInt(e).toString())) 
                                        == dob.split('/').reduce((t,e) => (t = parseInt(t).toString() + parseInt(e).toString())));
+  }
 
   return foundPeople;
 }
@@ -234,7 +247,10 @@ function getAge(person){
 // function that prompts and validates user input
 function promptFor(question, valid){
   do{
-    var response = prompt(question).trim();
+    var response = prompt(question);
+    if (response == null)
+      break;
+    response = response.trim();
     if (!valid(response))
       alert("Invalid input. Try again.")
   } while(!response || !valid(response));

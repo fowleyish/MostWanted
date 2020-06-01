@@ -92,6 +92,7 @@ function searchByTraits(people){
         searchResults = searchByWeight(searchResults);
         break;
       case "eye color":
+      case "eyecolor":
       case "ec":
         searchResults = searchByEyeColor(searchResults);
         break;
@@ -108,9 +109,10 @@ function searchByTraits(people){
       case "q":
         return null;
       default:
-        app(people);
+        displayOption = "cont";
+        alert("Invalid input. Try again.")
     }      
-    if (displayOption != "restart" && displayOption != "rs"){
+    if (displayOption != "restart" && displayOption != "rs" && displayOption != "cont"){
       if (searchResults.length == 0){
         alert("No records match your search criteria.  Try again.");
         criteriaCount = 0;
@@ -263,7 +265,7 @@ function dateOfBirth(input){
 
 // helper function to pass into promptFor to validate number entries
 function numbers(input){
-  return parseInt(input) != NaN;
+  return !isNaN(input);
 }
 
 // helper function to pass into promptFor to validate eye color
